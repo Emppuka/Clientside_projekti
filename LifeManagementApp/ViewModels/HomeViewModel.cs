@@ -36,11 +36,11 @@ public partial class HomeViewModel : ObservableObject
 
         if (WindSpeed > 5)
         {
-            KiteMessage = "🌊 Good weather for kitesurfing!";
+            KiteMessage = "🌊 Hyvä keli kitesurffaukselle!";
         }
         else
         {
-            KiteMessage = "No kitesurfing conditions.";
+            KiteMessage = "Ei onnistu kitesurffaus :(";
         }
     }
 }

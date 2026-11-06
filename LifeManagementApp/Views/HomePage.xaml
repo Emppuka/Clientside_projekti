@@ -26,11 +26,11 @@
 
                     <Label
                         Text="{Binding Temperature,
-                        StringFormat='Temperature: {0} °C'}" />
+                        StringFormat='Lämpötila: {0} °C'}" />
 
                     <Label
                         Text="{Binding WindSpeed,
-                        StringFormat='Wind Speed: {0} m/s'}" />
+                        StringFormat='Tuulen nopeus: {0} m/s'}" />
 
                     <Label
                         Text="{Binding KiteMessage}"

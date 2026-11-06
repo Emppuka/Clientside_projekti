@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using LifeManagementApp.Services;
+using LifeManagementApp.Views;
+
 
 namespace LifeManagementApp
 {
@@ -24,6 +26,8 @@ namespace LifeManagementApp
             builder.Services.AddSingleton<WeatherService>();
 
             builder.Services.AddSingleton<TodoService>();
+
+            builder.Services.AddTransient<HomePage>();
 #endif
 
             return builder.Build();
