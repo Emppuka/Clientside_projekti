@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="LifeManagementApp.Views.HomePage">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="15">
+
+            <Label
+                Text="Elämänhallinta-äppsi"
+                FontSize="30"
+                FontAttributes="Bold" />
+
+            <Label
+                Text="Sää nyt"
+                FontSize="24" />
+
+            <Frame Padding="15">
+
+                <VerticalStackLayout>
+
+                    <Label
+                        Text="{Binding Temperature,
+                        StringFormat='Temperature: {0} °C'}" />
+
+                    <Label
+                        Text="{Binding WindSpeed,
+                        StringFormat='Wind Speed: {0} m/s'}" />
+
+                    <Label
+                        Text="{Binding KiteMessage}"
+                        TextColor="Green" />
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>
