@@ -1,18 +1,26 @@
-﻿using LifeManagementApp.Models;
+﻿using LifeManagementApp.Data;
+using LifeManagementApp.Models;
 
 namespace LifeManagementApp.Services;
 
 public class TodoService
 {
-    private readonly List<TodoItem> _todos = new();
+    private readonly AppDbContext _context;
+
+    public TodoService(AppDbContext context)
+    {
+        _context = context;
+    }
 
     public List<TodoItem> GetTodos()
     {
-        return _todos;
+        return _context.Todos.ToList();
     }
 
     public void AddTodo(TodoItem todo)
     {
-        _todos.Add(todo);
+        _context.Todos.Add(todo);
+
+        _context.SaveChanges(); //TÄRKEÄ -> ilman tätä ei tallennu tietokantaan
     }
 }

@@ -1,6 +1,8 @@
 ﻿using LifeManagementApp.Services;
 using LifeManagementApp.ViewModels;
 using LifeManagementApp.Views;
+using LifeManagementApp.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 
@@ -35,9 +37,29 @@ namespace LifeManagementApp
             builder.Services.AddTransient<TodoViewModel>();
 
             builder.Services.AddTransient<TodoPage>();
+
+            string dbPath = Path.Combine(
+    FileSystem.AppDataDirectory,
+    "LifeManagementApp.db");
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlite(
+                    $"Data Source={dbPath}");
+            });
 #endif
 
-            return builder.Build();
+            var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                AppDbContext context =
+                    scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+                context.Database.EnsureCreated(); // Varmistaa tietokannan olemassaolon ja luo sen, jos sitä ei ole.
+            }
+
+            return app;
         }
     }
 }
