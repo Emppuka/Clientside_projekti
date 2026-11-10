@@ -27,6 +27,28 @@ public partial class TodoViewModel : ObservableObject
         }
     }
 
+    [ObservableProperty]
+    private TodoItem? selectedTodo;
+
+
+
+    private void ReloadTodos()
+    {
+        List<TodoItem> todos = _todoService
+            .GetTodos()
+            .OrderBy(t => t.Priority)
+            .ToList();
+
+        Todos.Clear();
+
+        foreach (TodoItem todo in todos)
+        {
+            Todos.Add(todo);
+        }
+
+        OnPropertyChanged(nameof(Todos));
+    }
+
 
     [RelayCommand]
     private void AddTodo()
@@ -42,8 +64,7 @@ public partial class TodoViewModel : ObservableObject
 
         _todoService.AddTodo(todo);
 
-        Todos.Add(todo);
-        SortTodos();
+        ReloadTodos();
 
         NewTodoTitle = string.Empty;
     }
@@ -55,42 +76,44 @@ public partial class TodoViewModel : ObservableObject
     {
         _todoService.DeleteTodo(todo);
 
-        Todos.Remove(todo);
-    }
-
-    
-    
-    [RelayCommand]
-    private void IncreasePriority(TodoItem todo)
-    {
-        if (todo.Priority > 0)
-        {
-            todo.Priority--;
-
-            _todoService.UpdateTodo(todo);
-
-            SortTodos();
-        }
+        ReloadTodos();
     }
 
     [RelayCommand]
-    private void DecreasePriority(TodoItem todo)
+    private void EditTodo(TodoItem todo)
     {
-        if (todo.Priority < 2)
-        {
-            todo.Priority++;
+        SelectedTodo = todo;
 
-            _todoService.UpdateTodo(todo);
+        NewTodoTitle = todo.Title;
 
-            SortTodos();
-        }
+        SelectedPriority = todo.Priority;
     }
-    
 
+    
+    [RelayCommand]
+    private void SaveChanges()
+    {
+        if (SelectedTodo == null)
+            return;
+
+        SelectedTodo.Title = NewTodoTitle;
+        SelectedTodo.Priority = SelectedPriority;
+
+        _todoService.UpdateTodo(SelectedTodo);
+
+        SelectedTodo = null;
+
+        NewTodoTitle = string.Empty;
+
+        SelectedPriority = 1;
+
+        ReloadTodos();
+    }
 
     private void SortTodos()
     {
-        List<TodoItem> sortedTodos = Todos
+        List<TodoItem> sortedTodos = _todoService
+            .GetTodos()
             .OrderBy(todo => todo.Priority)
             .ToList();
 

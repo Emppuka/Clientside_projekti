@@ -1,5 +1,6 @@
 ﻿using LifeManagementApp.Data;
 using LifeManagementApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LifeManagementApp.Services;
 
@@ -17,7 +18,9 @@ public class TodoService
 
     public List<TodoItem> GetTodos()
     {
-        return _context.Todos.ToList();
+        return _context.Todos
+            .AsNoTracking()
+            .ToList();
     }
 
     public void AddTodo(TodoItem todo)
@@ -40,11 +43,20 @@ public class TodoService
 
     public void UpdateTodo(TodoItem todo)
     {
-        _context.Todos.Update(todo);
+        TodoItem? existingTodo =
+            _context.Todos.FirstOrDefault(t => t.Id == todo.Id);
+
+        if (existingTodo == null)
+            return;
+
+        existingTodo.Title = todo.Title;
+        existingTodo.Priority = todo.Priority;
+        existingTodo.IsCompleted = todo.IsCompleted;
 
         _context.SaveChanges();
 
         TodosChanged?.Invoke();
     }
+
 
 }

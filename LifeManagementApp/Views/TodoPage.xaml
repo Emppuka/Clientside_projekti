@@ -36,6 +36,10 @@
             Text="Lisää tehtävä"
             Command="{Binding AddTodoCommand}" />
 
+        <Button
+    Text="Tallenna muutokset"
+    Command="{Binding SaveChangesCommand}" />
+
         <CollectionView
             ItemsSource="{Binding Todos}">
 
@@ -56,13 +60,8 @@
                                 FontSize="12" />
 
                             <Button
-    Text="Korota tärkeyttä"
-    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IncreasePriorityCommand}"
-    CommandParameter="{Binding}" />
-
-                            <Button
-    Text="Laske tärkeyttä"
-    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DecreasePriorityCommand}"
+    Text="Muokkaa"
+    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditTodoCommand}"
     CommandParameter="{Binding}" />
 
                             <Button

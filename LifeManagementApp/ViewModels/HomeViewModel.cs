@@ -62,17 +62,19 @@ public partial class HomeViewModel : ObservableObject
 
     private void LoadTopTodos()
     {
-        TopTodos.Clear();
-
         List<TodoItem> topTodos = _todoService
             .GetTodos()
             .OrderBy(todo => todo.Priority)
             .Take(3)
             .ToList();
 
+        TopTodos.Clear();
+
         foreach (TodoItem todo in topTodos)
         {
             TopTodos.Add(todo);
         }
+
+        OnPropertyChanged(nameof(TopTodos));
     }
 }

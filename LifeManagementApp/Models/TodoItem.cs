@@ -13,7 +13,7 @@ public class TodoItem
 
     public bool IsCompleted { get; set; }
 
-    [NotMapped]
+    [NotMapped] // Koko sovellus kaatui ilman näitä, koska EF yrittää mapata tämän tietokantaan, mutta se ei ole siellä.
     public string PriorityText
     {
         get
