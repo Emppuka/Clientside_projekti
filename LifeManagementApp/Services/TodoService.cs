@@ -23,4 +23,11 @@ public class TodoService
 
         _context.SaveChanges(); //TÄRKEÄ -> ilman tätä ei tallennu tietokantaan
     }
+
+    public void DeleteTodo(TodoItem todo)
+    {
+        _context.Todos.Remove(todo);
+
+        _context.SaveChanges();
+    }
 }

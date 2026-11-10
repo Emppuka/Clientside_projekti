@@ -15,10 +15,6 @@ public partial class TodoViewModel : ObservableObject
     [ObservableProperty]
     private string newTodoTitle = string.Empty;
 
-    public TodoViewModel(TodoService todoService)
-    {
-        _todoService = todoService;
-    }
 
     [RelayCommand]
     private void AddTodo()
@@ -42,6 +38,14 @@ public partial class TodoViewModel : ObservableObject
     [ObservableProperty]
     private int selectedPriority = 1;
 
+    [RelayCommand]
+    private void DeleteTodo(TodoItem todo)
+    {
+        _todoService.DeleteTodo(todo);
+
+        Todos.Remove(todo);
+    }
+
     private void SortTodos()
     {
         List<TodoItem> sortedTodos = Todos
@@ -51,6 +55,18 @@ public partial class TodoViewModel : ObservableObject
         Todos.Clear();
 
         foreach (TodoItem todo in sortedTodos)
+        {
+            Todos.Add(todo);
+        }
+    }
+
+    public TodoViewModel(TodoService todoService)
+    {
+        _todoService = todoService;
+
+        List<TodoItem> todos = _todoService.GetTodos();
+
+        foreach (TodoItem todo in todos)
         {
             Todos.Add(todo);
         }

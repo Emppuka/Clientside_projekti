@@ -42,19 +42,23 @@
             <CollectionView.ItemTemplate>
 
                 <DataTemplate>
-
                     <Frame Margin="0,5">
 
                         <VerticalStackLayout>
 
                             <Label
-                            Text="{Binding Title}"
-                            FontAttributes="Bold" />
+                                Text="{Binding Title}"
+                                FontAttributes="Bold" />
 
                             <Label
-                            Text="{Binding PriorityText,
-                            StringFormat='Tärkeys: {0}'}"
-                            FontSize="12" />
+                                Text="{Binding PriorityText,
+                                StringFormat='Tärkeys: {0}'}"
+                                FontSize="12" />
+
+                            <Button
+                                Text="Poista"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteTodoCommand}"
+                                CommandParameter="{Binding}" />
 
                         </VerticalStackLayout>
 
