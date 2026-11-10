@@ -2,6 +2,30 @@
 
 LifeManagementApp on .NET MAUI -sovellus, jonka tarkoituksena on auttaa käyttäjää hallitsemaan päivittäisiä tehtäviä ja seuraamaan säätilaa yhdestä käyttöliittymästä.
 
+## Tekoälyn käyttö
+
+Projektin aikana käytettiin Microsoft Copilotia apuna:
+
+- MVVM-rakenteen suunnittelussa
+- SQLite- ja Entity Framework Core -integraation toteutuksessa
+- .NET MAUI -käyttöliittymän rakentamisessa
+- virheiden etsinnässä ja korjaamisessa
+- README-dokumentaation laatimisessa
+
+Kaikki ratkaisut testattiin, ymmärrettiin ja tarvittaessa muokattiin ennen niiden lisäämistä projektiin.
+
+## Käytetyt teknologiat
+
+- .NET MAUI
+- C#
+- MVVM
+- CommunityToolkit.Mvvm
+- Dependency Injection
+- SQLite
+- Entity Framework Core
+- Open-Meteo REST API
+- Git ja GitHub
+
 ## Ominaisuudet
 
 ### TODO-lista
