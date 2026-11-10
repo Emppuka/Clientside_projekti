@@ -27,7 +27,7 @@ public partial class TodoViewModel : ObservableObject
         TodoItem todo = new TodoItem
         {
             Title = NewTodoTitle,
-            Priority = 1
+            Priority = selectedPriority
         };
 
         _todoService.AddTodo(todo);
@@ -36,4 +36,6 @@ public partial class TodoViewModel : ObservableObject
 
         NewTodoTitle = string.Empty;
     }
+    [ObservableProperty]
+    private int selectedPriority = 1;
 }

@@ -18,6 +18,20 @@
             Placeholder="Kirjoita uusi tehtävä"
             Text="{Binding NewTodoTitle}" />
 
+        <Picker
+        Title="Valitse tärkeys"
+        SelectedIndex="{Binding SelectedPriority}">
+
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Korkea</x:String>
+                    <x:String>Normaali</x:String>
+                    <x:String>Matala</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+
+        </Picker>
+
         <Button
             Text="Lisää tehtävä"
             Command="{Binding AddTodoCommand}" />
@@ -31,8 +45,18 @@
 
                     <Frame Margin="0,5">
 
-                        <Label
-                            Text="{Binding Title}" />
+                        <VerticalStackLayout>
+
+                            <Label
+                            Text="{Binding Title}"
+                            FontAttributes="Bold" />
+
+                            <Label
+                            Text="{Binding PriorityText,
+                            StringFormat='Tärkeys: {0}'}"
+                            FontSize="12" />
+
+                        </VerticalStackLayout>
 
                     </Frame>
 

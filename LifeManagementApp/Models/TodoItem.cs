@@ -11,4 +11,18 @@ public class TodoItem
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     public bool IsCompleted { get; set; }
+
+    public string PriorityText
+    {
+        get
+        {
+            return Priority switch
+            {
+                0 => "Korkea",
+                1 => "Normaali",
+                2 => "Matala",
+                _ => "Tuntematon"
+            };
+        }
+    }
 }
