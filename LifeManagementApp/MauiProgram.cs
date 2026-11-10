@@ -30,6 +30,8 @@ namespace LifeManagementApp
 
             builder.Services.AddTransient<HomePage>();
 
+            builder.Services.AddTransient<HomeViewModel>();
+
             builder.Services.AddTransient<TodoViewModel>();
 
             builder.Services.AddTransient<TodoPage>();

@@ -1,12 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LifeManagementApp.Models;
 using LifeManagementApp.Services;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace LifeManagementApp.ViewModels;
 
 public partial class HomeViewModel : ObservableObject
 {
     private readonly WeatherService _weatherService;
+
+    private readonly TodoService _todoService;
 
     [ObservableProperty]
     private double temperature;
@@ -17,10 +22,19 @@ public partial class HomeViewModel : ObservableObject
     [ObservableProperty]
     private string kiteMessage = "";
 
-    public HomeViewModel(WeatherService weatherService)
+    public ObservableCollection<TodoItem> TopTodos { get; }
+    = new ObservableCollection<TodoItem>();
+
+    public HomeViewModel(
+    WeatherService weatherService,
+    TodoService todoService)
     {
         _weatherService = weatherService;
+        _todoService = todoService;
+
         LoadWeatherCommand.Execute(null);
+
+        LoadTopTodos();
     }
 
     [RelayCommand]
@@ -41,6 +55,22 @@ public partial class HomeViewModel : ObservableObject
         else
         {
             KiteMessage = "Ei onnistu kitesurffaus :(";
+        }
+    }
+
+    private void LoadTopTodos()
+    {
+        TopTodos.Clear();
+
+        List<TodoItem> topTodos = _todoService
+            .GetTodos()
+            .OrderBy(todo => todo.Priority)
+            .Take(3)
+            .ToList();
+
+        foreach (TodoItem todo in topTodos)
+        {
+            TopTodos.Add(todo);
         }
     }
 }
