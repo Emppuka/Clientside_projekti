@@ -9,12 +9,13 @@
     <TabBar>
 
         <ShellContent
-            Title="Home"
-            ContentTemplate="{DataTemplate views:HomePage}" />
+        Title="Home"
+        ContentTemplate="{DataTemplate views:HomePage}" />
 
-        <ShellContent
-            Title="Todo-lista"
-            ContentTemplate="{DataTemplate views:TodoPage}" />
+            <ShellContent
+        Title="Todo"
+        ContentTemplate="{DataTemplate views:TodoPage}" />
+
 
     </TabBar>
 

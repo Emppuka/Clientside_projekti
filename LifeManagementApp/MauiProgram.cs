@@ -26,9 +26,9 @@ namespace LifeManagementApp
 
             builder.Services.AddSingleton<HttpClient>();
 
-            builder.Services.AddSingleton<WeatherService>();
+            builder.Services.AddTransient<WeatherService>();
 
-            builder.Services.AddSingleton<TodoService>();
+            builder.Services.AddTransient<TodoService>();
 
             builder.Services.AddTransient<HomePage>();
 

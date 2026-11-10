@@ -42,7 +42,7 @@
             <CollectionView.ItemTemplate>
 
                 <DataTemplate>
-                    <Frame Margin="0,5">
+                    <Border Margin="0,5">
 
                         <VerticalStackLayout>
 
@@ -56,13 +56,23 @@
                                 FontSize="12" />
 
                             <Button
+    Text="Korota tärkeyttä"
+    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IncreasePriorityCommand}"
+    CommandParameter="{Binding}" />
+
+                            <Button
+    Text="Laske tärkeyttä"
+    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DecreasePriorityCommand}"
+    CommandParameter="{Binding}" />
+
+                            <Button
                                 Text="Poista"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteTodoCommand}"
                                 CommandParameter="{Binding}" />
 
                         </VerticalStackLayout>
 
-                    </Frame>
+                    </Border>
 
                 </DataTemplate>
 

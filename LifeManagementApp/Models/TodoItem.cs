@@ -1,4 +1,5 @@
 ﻿namespace LifeManagementApp.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class TodoItem
 {
@@ -12,6 +13,7 @@ public class TodoItem
 
     public bool IsCompleted { get; set; }
 
+    [NotMapped]
     public string PriorityText
     {
         get
@@ -25,4 +27,7 @@ public class TodoItem
             };
         }
     }
+
+    [NotMapped]
+    public bool IsEditing { get; set; } // Tällä seurataan onko tehtävä muokkaustilassa
 }

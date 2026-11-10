@@ -32,6 +32,8 @@ public partial class HomeViewModel : ObservableObject
         _weatherService = weatherService;
         _todoService = todoService;
 
+        _todoService.TodosChanged += LoadTopTodos;
+
         LoadWeatherCommand.Execute(null);
 
         LoadTopTodos();
