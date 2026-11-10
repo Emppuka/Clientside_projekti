@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using LifeManagementApp.Models;
 using LifeManagementApp.Services;
 using System.Collections.ObjectModel;
+using System.Linq;
+
 
 namespace LifeManagementApp.ViewModels;
 
@@ -27,15 +29,30 @@ public partial class TodoViewModel : ObservableObject
         TodoItem todo = new TodoItem
         {
             Title = NewTodoTitle,
-            Priority = selectedPriority
+            Priority = SelectedPriority
         };
 
         _todoService.AddTodo(todo);
 
         Todos.Add(todo);
+        SortTodos();
 
         NewTodoTitle = string.Empty;
     }
     [ObservableProperty]
     private int selectedPriority = 1;
+
+    private void SortTodos()
+    {
+        List<TodoItem> sortedTodos = Todos
+            .OrderBy(todo => todo.Priority)
+            .ToList();
+
+        Todos.Clear();
+
+        foreach (TodoItem todo in sortedTodos)
+        {
+            Todos.Add(todo);
+        }
+    }
 }
