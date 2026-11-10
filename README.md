@@ -115,8 +115,8 @@ Projektin aikana harjoiteltiin:
 
 ## Kehittäjä
 
-Emmilotta Kallio
+Emppu K
 
 Syksy 2026
 
-CCNA / Ohjelmistokehitysprojekti
+Client Side Programming
